@@ -322,6 +322,12 @@ aside .footer__date {
   bottom: 0;
 }
 
+.attribution {
+  text-align: center;
+  margin-top: 5rem;
+  color: var(--text-secondary);
+}
+
 @media screen and (max-width: 480px) {
   body {
     display: block;
