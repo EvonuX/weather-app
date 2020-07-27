@@ -87,8 +87,12 @@ const countryFromId = id => {
     .then(res => res.json())
     .then(data => {
       state = data
+      populate('celsius')
+      hideLoader()
     })
     .catch(err => {
+      populate('celsius')
+      hideLoader()
       console.error(err)
       alert('Oops, something went wrong!')
     })
@@ -102,8 +106,8 @@ const getWeather = query => {
   )
     .then(res => res.json())
     .then(data => {
+      console.log(data)
       countryFromId(data[0].woeid)
-      hideLoader()
     })
     .catch(err => {
       hideLoader()
@@ -112,19 +116,19 @@ const getWeather = query => {
 }
 
 // Populate markup with dynamic content
-const {
-  the_temp,
-  weather_state_name,
-  wind_direction_compass,
-  applicable_date,
-  wind_speed,
-  wind_direction,
-  humidity,
-  visibility,
-  air_pressure
-} = state.consolidated_weather[0]
-
 const populate = unit => {
+  const {
+    the_temp,
+    weather_state_name,
+    wind_direction_compass,
+    applicable_date,
+    wind_speed,
+    wind_direction,
+    humidity,
+    visibility,
+    air_pressure
+  } = state.consolidated_weather[0]
+
   IMG.src = '/assets/' + weather_state_name + '.png'
   TEMP.innerHTML = setTemp(the_temp, unit)
   WEATHER.innerText = weather_state_name
@@ -189,5 +193,3 @@ document.addEventListener('keydown', e => {
     SIDEBAR_BUTTON.click()
   }
 })
-
-populate('celsius')
