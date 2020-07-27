@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="main.css">
+    <title>Weather App</title>
+  </head>
+
+  <body>
+    <aside>
+      <div class="header">
+        <button class="btn" id="sidebar-open">
+          Search for places
+        </button>
+
+        <button class="btn btn--round" id="get-location">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#e7e7eb" width="18px" height="18px">
+            <path d="M0 0h24v24H0z" fill="none" />
+            <path
+              d="M12 8c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4zm8.94 3c-.46-4.17-3.77-7.48-7.94-7.94V1h-2v2.06C6.83 3.52 3.52 6.83 3.06 11H1v2h2.06c.46 4.17 3.77 7.48 7.94 7.94V23h2v-2.06c4.17-.46 7.48-3.77 7.94-7.94H23v-2h-2.06zM12 19c-3.87 0-7-3.13-7-7s3.13-7 7-7 7 3.13 7 7-3.13 7-7 7z" />
+          </svg>
+        </button>
+      </div>
+
+      <img src="" alt="weather" id="main-img" width="200" />
+      <div id="main-temp">15 C</div>
+      <div id="main-weather">Shower</div>
+
+      <div class="footer">
+        <div class="footer__date">
+          <div>Today</div>
+          <div id="main-date">Fri. 5 Jun</div>
+        </div>
+        <div class="footer__city">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#6e707a" width="18px" height="18px">
+            <path d="M0 0h24v24H0z" fill="none" />
+            <path
+              d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
+          </svg>
+          <span id="main-city">
+            Helsinki
+          </span>
+        </div>
+      </div>
+    </aside>
+
+    <main>
+      <div class="toggleButtons">
+        <div class="btn btn--round" data-metric="celsius">&deg;C</div>
+        <div class="btn btn--round" data-metric="fahrenheit">&deg;F</div>
+      </div>
+
+      <div id="forecast"></div>
+
+      <p class="title">Today's Hightlights</p class="title">
+
+      <div class="highlights">
+        <div class="highlights__highlight">
+          <p>Wind Status</p>
+          <span id="main-wind"></span> mph
+
+          <div class="highlights__footer">
+            <div id="main-windDir" class="btn btn--round">
+              <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24" transform="rotate(45)"
+                class="w-4 h-4 fill-current text-white">
+                <path d="M0 0h24v24H0V0z" fill="none"></path>
+                <path fill="#fff" d="M21 3L3 10.53v.98l6.84 2.65L12.48 21h.98L21 3z"></path>
+              </svg>
+            </div>
+            <div id="main-windDirText"></div>
+          </div>
+        </div>
+
+        <div class="highlights__highlight">
+          <p>Humidity</p>
+          <span id="main-humidity"></span>%
+
+          <div class="highlights__footer">
+            <div class="highlights__footer--bar">
+              <div class="bar--stats">
+                <span>0</span>
+                <span>50</span>
+                <span>100</span>
+              </div>
+              <div class="bar"></div>
+              <div id="bar-fill" class="bar--fill"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="highlights__highlight">
+          <p>Visibility</p>
+          <span id="main-visibility"></span> miles
+        </div>
+
+        <div class="highlights__highlight">
+          <p>Air Pressure</p>
+          <span id="main-pressure"></span> mb
+        </div>
+      </div>
+
+    </main>
+
+    <div class="sidebar" id="sidebar">
+      <button class="btn btn--clear" id="sidebar-close">&times;</button>
+
+      <div class="sidebar__header">
+        <input type="text" name="search" id="search" placeholder="Search location" />
+        <button class="btn" id="search-btn">Search</button>
+      </div>
+
+      <div class="sidebar__content">
+        <button class="sidebar__content--button" data-weather="london">London</button>
+        <button class="sidebar__content--button" data-weather="barcelona">Barcelona</button>
+        <button class="sidebar__content--button" data-weather="long beach">Long Beach</button>
+      </div>
+    </div>
+
+    <div id="loader">
+      <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="200px" height="200px"
+        viewBox="0 0 100 100" preserveAspectRatio="xMidYMid">
+        <circle cx="50" cy="50" r="0" fill="none" stroke="#100e1d" stroke-width="2">
+          <animate attributeName="r" repeatCount="indefinite" dur="1s" values="0;40" keyTimes="0;1"
+            keySplines="0 0.2 0.8 1" calcMode="spline" begin="-0.5s"></animate>
+          <animate attributeName="opacity" repeatCount="indefinite" dur="1s" values="1;0" keyTimes="0;1"
+            keySplines="0.2 0 0.8 1" calcMode="spline" begin="-0.5s"></animate>
+        </circle>
+        <circle cx="50" cy="50" r="0" fill="none" stroke="#e7e7eb" stroke-width="2">
+          <animate attributeName="r" repeatCount="indefinite" dur="1s" values="0;40" keyTimes="0;1"
+            keySplines="0 0.2 0.8 1" calcMode="spline"></animate>
+          <animate attributeName="opacity" repeatCount="indefinite" dur="1s" values="1;0" keyTimes="0;1"
+            keySplines="0.2 0 0.8 1" calcMode="spline"></animate>
+        </circle>
+      </svg>
+    </div>
+
+    <script src="app.js" defer></script>
+  </body>
+
+</html>
