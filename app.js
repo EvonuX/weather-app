@@ -79,6 +79,8 @@ const getLocation = () => {
   }
 }
 
+getLocation()
+
 // Get API data and update state
 const countryFromId = id => {
   fetch(`https://cors-anywhere.herokuapp.com/https://www.metaweather.com/api/location/${id}`)
@@ -188,5 +190,4 @@ document.addEventListener('keydown', e => {
   }
 })
 
-getLocation()
 populate('celsius')
